@@ -11,39 +11,34 @@ export default function Clientes() {
 
     const CarregarClientes=async()=>{
         const result=await axios.get("http://localhost:8080/clientes")
-        console.log(result)
+        setClientes(result.data);
     }
 
     return (
         <div className='container'>
             <div className='py-4'>
-                <table class="table border shadow">
+                <table className="table border shadow">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        {
+                            clientes.map((cliente,index)=>(
+                                <tr>
+                                  <th scope="row" key={index}>
+                                    {index + 1}
+                </                  th>
+                                  <td>{cliente.nome}</td>
+                                  <td>{cliente.cpf}</td>
+                                </tr>
+                              ))
+                        }
+                        
+                        
                     </tbody>
                 </table>
 
