@@ -23,6 +23,7 @@ export default function Clientes() {
                             <th scope="col">#</th>
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
+                            <th scope='col'>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +35,11 @@ export default function Clientes() {
                 </                  th>
                                   <td>{cliente.nome}</td>
                                   <td>{cliente.cpf}</td>
+                                  <td>
+                                    <button className='btn btn-primary mx-2'>vizualizar</button>
+                                    <button className='btn btn-outline-primary mx-2'>Editar</button>
+                                    <button className='btn btn-danger mx-2'>Deletar</button>
+                                  </td>
                                 </tr>
                               ))
                         }
