@@ -1,21 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link, useParams } from 'react-router-dom';
+import Navbar from '../layout/Navbar';
 
 export default function Clientes() {
+    const [clientes, setClientes] = useState([]);
+    const {codigo} = useParams();
 
-    const  [clientes, setClientes]=useState([]);
+   
+    const [cliente, setCliente] = useState({
+        
+        nome: "",
+        cpf: "",
+        endereco: "",
+        cidade: "",
+        complemento: "",
+        uf: "",
+        celular: "",
+        telefone: "",
+        observacao: "",
+        rg: "",
+        dataNascmemto: "",
+        cep: ""
+    });
 
-    useEffect(()=>{
-        CarregarClientes();
-    },[])
+    const { nome, cpf, endereco, cidade, complemento, uf, celular, telefone, observacao, rg, dataNascmemto, cep } = cliente;
+   
+    const onInputChange = (e) => {
+        setCliente({ ...cliente, [e.target.name]: e.target.value });
+    };
 
-    const CarregarClientes=async()=>{
-        const result=await axios.get("http://localhost:8080/clientes")
-        setClientes(result.data);
+    const onSubmit = async (e) => {
+        console.log("cliente: "+cliente.codigo)
+        await axios.put(`http://localhost:8080/cliente/${codigo}`, cliente);
+    };
+
+    const carregarCliente = async () => {
+        const result = await axios.get(`http://localhost:8080/cliente/${codigo}`);
+        setCliente(result.data);
+    };
+
+    useEffect(() => {
+        carregarCliente();
+    }, []);
+
+    useEffect(() => {
+        const carregarClientes = async () => {
+            const result = await axios.get("http://localhost:8080/clientes");
+            setClientes(result.data);
+            
+        };
+        carregarClientes();
+    }, []);
+    const deletarCliente=async (codigo)=>{
+            await axios.delete(`http://localhost:8080/cliente/${codigo}`)
+            carregarCliente()
     }
 
     return (
+        
         <div className='container'>
+            <Navbar/>
             <div className='py-4'>
                 <table className="table border shadow">
                     <thead>
@@ -27,28 +72,34 @@ export default function Clientes() {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            clientes.map((cliente,index)=>(
-                                <tr>
-                                  <th scope="row" key={index}>
-                                    {index + 1}
-                </                  th>
-                                  <td>{cliente.nome}</td>
-                                  <td>{cliente.cpf}</td>
-                                  <td>
+                        {clientes.map((cliente, index) => (
+                            <tr key={index}>
+                                <th scope="row">{index+1}</th>
+                                <td></td>
+                                <td>{cliente.nome}</td>
+                                <td>{cliente.cpf}</td>
+                                <td>
                                     <button className='btn btn-primary mx-2'>vizualizar</button>
-                                    <button className='btn btn-outline-primary mx-2'>Editar</button>
-                                    <button className='btn btn-danger mx-2'>Deletar</button>
-                                  </td>
-                                </tr>
-                              ))
-                        }
-                        
-                        
+                                    <Link
+                                        
+                                        className='btn btn-outline-primary mx-2'
+                                        to={`/novoCliente/${cliente.codigo}`} >
+                                           Editar
+                                    </Link>
+                                    <button className='btn btn-danger mx-2'
+                                    onClick={()=>deletarCliente(cliente.codigo)}
+                                    >Deletar</button>
+                                {}
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
-
             </div>
+
+
+
+
         </div>
     )
 }
