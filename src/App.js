@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import NovoCliente from './clientes/NovoCliente';
 import Clientes from './pages/Clientes';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NovoUsuario from './usuarios/NovoUsuario';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/cadastro" element={<NovoUsuario/>}/> 
           <Route exact path="/clientes" element={<Clientes />} />
           <Route exact path="/novoCliente/:codigo" element={<NovoCliente />} />
         </Routes>
