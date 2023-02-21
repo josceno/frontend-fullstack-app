@@ -1,12 +1,13 @@
 import React from 'react'
 import { useRef,useState, useEffect, useContext } from 'react'
 import contexto from '../context/Autenticador';
-
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from '../api/axiosj';
 import Clientes from './Clientes';
 const LOGIN_URL = '/auth'
-
+    
 export default function Home() {
+  let navigate = useNavigate()
   const {setAuth} = useContext(contexto);
   const usuarioRef = useRef();
   const errorRef = useRef();
@@ -20,10 +21,13 @@ export default function Home() {
     usuarioRef.current.focus();
   },[])
 
+ 
+
   useEffect(()=>{
     setErroMsg('')
   },[cpf,password])
   const handleSubmmit = async (e) =>{
+        
        e.preventDefault();
       try {
           const response = await axios.post(LOGIN_URL,JSON.stringify({cpf,password}),
@@ -34,7 +38,7 @@ export default function Home() {
           );
           let resp = JSON.stringify(response?.data)
           console.log(JSON.stringify(response?.data));
-          //console.log(JSON.stringify(response?.data))
+          console.log(JSON.stringify(response))
           setAuth({cpf,password})
           setCpf("")
           setpassword("")
@@ -68,9 +72,8 @@ export default function Home() {
    
     <>
           {success ? (
-                <section>
-                    <Clientes/>
-                </section>
+              navigate("/clientes")
+                
             ) : (
 
    
@@ -96,7 +99,14 @@ export default function Home() {
 
             <button>Entrar</button>
        </form>
-    </section>
+                <p>
+                  Nova conta?<br />
+                        <span className="line">
+                            {/*put router link here*/}
+                            <Link to="/cadastro">Sign Up</Link>
+                        </span>
+                    </p>
+      </section>
     )}
     </>
   )

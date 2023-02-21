@@ -4,9 +4,9 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function handleSubmit(event) {
-    
-  }
- 
+
+}
+
 
 export default function Navbar() {
     const [cliente, setCliente] = useState({
@@ -31,8 +31,8 @@ export default function Navbar() {
         setCliente({ ...cliente, [e.target.name]: e.target.value })
     }
 
-    const onSubmit= async (e)=>{
-        await axios.post("http://localhost:8080/cliente",cliente)
+    const onSubmit = async (e) => {
+        await axios.post("http://localhost:8080/cliente", cliente)
     };
     return (
         <div>
@@ -48,7 +48,7 @@ export default function Navbar() {
                         aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <button  data-bs-toggle="modal" data-bs-target="#janelaModal" className='btn btn-outline-light' to="/novoCliente" >Cadastrar Usuário</button>
+                    <button data-bs-toggle="modal" data-bs-target="#janelaModal" className='btn btn-outline-light' to="/novoCliente" >Cadastrar Usuário</button>
                 </div>
             </nav>
 
@@ -61,56 +61,81 @@ export default function Navbar() {
                         </div>
                         <div className='container'>
                             <div className='row'>
-                                <div className='col-md-6 offset-md-3 border rounded p-4 mt-2'>
-                                    <div className='mb-3'>
-                                        <form onSubmit={(e)=>onSubmit(e)} >
-                                            <label htmlFor="nome">Nome:</label>
-                                            <input type={"text"} className="form-control" id="nome" name="nome" value={nome} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="cpf">CPF:</label>
-                                            <input type="text" id="cpf" name="cpf" value={cpf} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="endereco">Endereço:</label>
-                                            <input type="text" id="endereco" name="endereco" value={endereco} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="cidade">Cidade:</label>
-                                            <input type="text" id="cidade" name="cidade" value={cidade} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="complemento">Complemento:</label>
-                                            <input type="text" id="complemento" name="complemento" value={complemento} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="uf">UF:</label>
-                                            <input type="text" id="uf" name="uf" value={uf} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="celular">Celular:</label>
-                                            <input type="text" id="celular" name="celular" value={celular} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="telefone">Telefone:</label>
-                                            <input type="text" id="telefone" name="telefone" value={telefone} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="observacao">Observação:</label>
-                                            <input type="text" id="observacao" name="observacao" value={observacao} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="rg">RG:</label>
-                                            <input type="text" id="rg" name="rg" value={rg} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="dataNascmemto">Data de Nascimento:</label>
-                                            <input type="date" id="dataNascmemto" name="dataNascmemto" value={dataNascmemto} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <label htmlFor="cep">CEP:</label>
-                                            <input type="text" id="cep" name="cep" value={cep} onChange={(e) => onInputChange(e)} /><br />
-
-                                            <button  type='submit' className='btn btn-outline-primary'>adicionar</button>
-                                            
-                                            <button type='reset' className='btn btn-outline-danger'>Cancelar</button>
-                                        </form>
-
+                                <form onSubmit={(e) => onSubmit(e)} >
+                                    <div className='form-group'>
+                                        <label htmlFor="nome">Nome:</label>
+                                        <input className="form-control" type={"text"} id="nome" name="nome" value={nome} onChange={(e) => onInputChange(e)} />
                                     </div>
 
-                                </div>
+                                    <div className='form-group row'>
+                                        <div className='col-md-4'>
+                                            <label htmlFor="cpf">CPF:</label>
+                                            <input className="form-control" type="text" id="cpf" name="cpf" value={cpf} onChange={(e) => onInputChange(e)} />
+                                        </div>
+
+
+                                        <div className='col-md-4'>
+                                            <label htmlFor="rg">RG:</label>
+                                            <input className="form-control" type="text" id="rg" name="rg" value={rg} onChange={(e) => onInputChange(e)} />
+
+                                        </div>
+
+                                        <div className='col-md-3'>
+                                            <label htmlFor="dataNascmemto">Data de Nascimento:</label>
+                                            <input className="form-control" type="date" id="dataNascmemto" name="dataNascmemto" value={dataNascmemto} onChange={(e) => onInputChange(e)} />
+                                        </div>
+                                    </div>
+                                    <div className='form-group row'>
+                                        <div className='col-md-6'>
+                                            <label htmlFor="endereco">Endereço:</label>
+                                            <input className="form-control" type="text" id="endereco" name="endereco" value={endereco} onChange={(e) => onInputChange(e)} />
+                                        </div>
+                                        <div className='col-md-6'>
+                                            <label htmlFor="complemento">Complemento:</label>
+                                            <input className="form-control" type="text" id="complemento" name="complemento" value={complemento} onChange={(e) => onInputChange(e)} />
+                                        </div>
+                                    </div>
+                                    <div className='form-group row'>
+                                        <div className='col-md-6'>
+                                            <label htmlFor="cep">CEP:</label>
+                                            <input className="form-control" type="text" id="cep" name="cep" value={cep} onChange={(e) => onInputChange(e)} />
+                                        </div>
+                                        <div className='col-md-4'>
+                                            <label htmlFor="cidade">Cidade:</label>
+                                            <input className="form-control" type="text" id="cidade" name="cidade" value={cidade} onChange={(e) => onInputChange(e)} />
+                                        </div>
+                                        <div className='col-md-2'>
+                                            <label htmlFor="uf">UF:</label>
+                                            <input className="form-control" type="text" id="uf" name="uf" value={uf} onChange={(e) => onInputChange(e)} />
+                                        </div>
+                                    </div>
+                                    <div className='form-group row'>
+                                        <div className='col-md-4'>
+                                            <label htmlFor="celular">Celular:</label>
+                                            <input className="form-control" type="text" id="celular" name="celular" value={celular} onChange={(e) => onInputChange(e)} />
+                                        </div>
+
+
+                                        <div className='col-md-4'>
+
+                                            <label htmlFor="telefone">Telefone:</label>
+                                            <input className="form-control" type="text" id="telefone" name="telefone" value={telefone} onChange={(e) => onInputChange(e)} />
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="observacao">Observação:</label>
+                                        <input className="form-control" type="text" id="observacao" name="observacao" rows="6" value={observacao} onChange={(e) => onInputChange(e)} />
+                                    </div>
+
+                                    <button type='submit' className='btn btn-outline-primary'>adicionar</button>
+
+                                    <button type='reset' className='btn btn-outline-danger'>Cancelar</button>
+                                </form>
+
                             </div>
 
                         </div>
+
                     </div>
 
                 </div>

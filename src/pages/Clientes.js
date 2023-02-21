@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams,useNavigate } from 'react-router-dom';
 import Navbar from '../layout/Navbar';
 
 export default function Clientes() {
+    let navigate= useNavigate()
     const [clientes, setClientes] = useState([]);
     const {codigo} = useParams();
 
@@ -29,7 +30,11 @@ export default function Clientes() {
     const onInputChange = (e) => {
         setCliente({ ...cliente, [e.target.name]: e.target.value });
     };
-
+    const carregarClientes = async () => {
+        const result = await axios.get("http://localhost:8080/clientes");
+        setClientes(result.data);
+        
+    };
     const onSubmit = async (e) => {
         console.log("cliente: "+cliente.codigo)
         await axios.put(`http://localhost:8080/cliente/${codigo}`, cliente);
@@ -45,16 +50,14 @@ export default function Clientes() {
     }, []);
 
     useEffect(() => {
-        const carregarClientes = async () => {
-            const result = await axios.get("http://localhost:8080/clientes");
-            setClientes(result.data);
-            
-        };
+        
         carregarClientes();
     }, []);
     const deletarCliente=async (codigo)=>{
             await axios.delete(`http://localhost:8080/cliente/${codigo}`)
             carregarCliente()
+            carregarClientes();
+            navigate("/clientes")
     }
 
     return (
