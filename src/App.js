@@ -19,6 +19,9 @@ function App() {
            <Routes>
              <Route exact path="/clienteRelatorio" element={<Pdf/>}/>
             </Routes>
+            <Routes>
+            <Route exact path="/fpdf/:codigo" element ={<FPdf/>}/>
+            </Routes>
     </Router>
     {/*<Router>
            <Routes>
