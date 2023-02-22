@@ -33,7 +33,13 @@ function Fpdf() {
     const onInputChange = (e) => {
         setCliente({ ...cliente, [e.target.name]: e.target.value })
     }
-    axios.get(`http://localhost:8080/imprimirF/${codigo}`);
+    useEffect(() => {
+        // Load the PDF file after the component has mounted
+        axios.get(`http://localhost:8080/imprimirF/${codigo}`);
+      }, []);
+      
+    
+    //axios.get(`http://localhost:8080/imprimirF/${codigo}`);
     /*const carregarCliente = async () => {
          await axios.get(`http://localhost:8080/imprimirF/${codigo}`);
         
@@ -46,7 +52,8 @@ function Fpdf() {
     const [numPages, setNumPages] = useState(1);  
     return (
         <div>
-        <object data="/clienteF.pdf" type="application/pdf" width="100%" height="700px">
+        <object data="/clientesF.pdf" type="application/pdf" width="100%" height="1000px">
+
         </object>
     </div>
 
