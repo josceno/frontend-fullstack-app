@@ -88,7 +88,7 @@ export default function Clientes() {
                         {
                             filteredClientes.map((cliente, index) => (
                                 <tr key={index}>
-                                    <th scope="row">{index + 1}</th>
+                                    <th scope="row">{cliente.codigo ?? ""}</th>
                                     <td>{cliente.nome ?? ""}</td>
                                     <td>{cliente.cpf ?? ""}</td>
                                     <td>

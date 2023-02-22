@@ -9,9 +9,11 @@ export const Autenticador = ({children})=>{
     
 
     return(
+        <div>
         <contexto.Provider value={{auth, setAuth }}>
-            ({children})
+            {children}
         </contexto.Provider>
+        </div>
     )
     
 }

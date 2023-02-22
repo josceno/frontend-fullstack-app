@@ -13,16 +13,24 @@ import Pdf from "./assets/pdf"
 
 function App() {
   return (
+    <div>
+    <Router>
+           <Routes>
+             <Route exact path="/clienteRelatorio" element={<Pdf/>}/>
+            </Routes>
+    </Router>
+   
+   
     <div className="App">
       <Router>
-        <Routes>
-          <Route exact path="/clienteRelatorio" element={<Pdf/>}/>
+        <Routes>         
           <Route exact path="/" element={<Login />} />
           <Route exact path="/cadastro" element={<NovoUsuario/>}/> 
           <Route exact path="/clientes" element={<Home />} />
           <Route exact path="/novoCliente/:codigo" element={<NovoCliente />} />
         </Routes>
       </Router>
+    </div>
     </div>
   );
 }
