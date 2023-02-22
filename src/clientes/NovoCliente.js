@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { Button } from 'bootstrap'
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 
 
 
 export default function NovoCliente() {
-
-    let navigate=useNavigate();
-
+ 
+    let navlink=useNavigate("/clientes")
+    
     const { codigo } = useParams();
     const [cliente, setCliente] = useState({
+        codigo: codigo,
         nome: "",
         cpf: "",
         endereco: "",
@@ -25,22 +26,17 @@ export default function NovoCliente() {
         dataNascmemto: "",
         cep: ""
     })
-
+    console.log("cliente: 2"+codigo)
     const { nome, cpf, endereco, cidade, complemento, uf,
         celular, telefone, observacao, rg, dataNascmemto, cep } = cliente
 
     const onInputChange = (e) => {
         setCliente({ ...cliente, [e.target.name]: e.target.value })
     }
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        console.log("cliente: " + cliente.codigo)
-        await axios.put(`http://localhost:8080/cliente/${codigo}`, cliente);
-        navigate("/clientes")
-    };
-
+    
     const carregarCliente = async () => {
         const result = await axios.get(`http://localhost:8080/cliente/${codigo}`);
+        console.log("cliente: "+codigo)
         setCliente(result.data);
     };
 
@@ -48,13 +44,16 @@ export default function NovoCliente() {
         carregarCliente();
     }, []);
 
-    useEffect(() => {
-        const carregarClientes = async () => {
-            const result = await axios.get("http://localhost:8080/clientes");
-            setCliente(result.data);
-        };
-        carregarClientes();
-    }, []);
+   
+    const onSubmit =(e) => {
+        e.preventDefault()
+        console.log("cliente: "+cliente.codigo)
+        axios.put(`http://localhost:8080/cliente/${codigo}`, cliente);
+        navlink("/clientes")
+        
+        return false;
+    };
+
 
     return (
         
@@ -63,13 +62,13 @@ export default function NovoCliente() {
                         <form onSubmit={(e) => onSubmit(e)} >
                             <div className='form-group'>
                                 <label htmlFor="nome">Nome:</label>
-                                <input className="form-control" type={"text"}  id="nome" name="nome" value={nome} onChange={(e) => onInputChange(e)} />
+                                <input className="form-control" type={"text"}  id="nome" name="nome" value={nome} onChange={(e) => onInputChange(e)} required/>
                             </div>
 
                             <div className='form-group row'>
                                 <div className='col-md-4'>
                                     <label htmlFor="cpf">CPF:</label>
-                                    <input className="form-control" type="text" id="cpf" name="cpf" value={cpf} onChange={(e) => onInputChange(e)} />
+                                    <input className="form-control" type="text" id="cpf" name="cpf" value={cpf} onChange={(e) => onInputChange(e)} required />
                                 </div>
 
 
