@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NovoUsuario from './usuarios/NovoUsuario';
 import Pdf from "./assets/pdf" 
+import FPdf from "./assets/Fpdf" 
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
              <Route exact path="/clienteRelatorio" element={<Pdf/>}/>
             </Routes>
     </Router>
+    <Router>
+           <Routes>
+            <Route exact path="/fpdf/:codigo" element ={<FPdf/>}/>
+            </Routes>
+  </Router>
    
    
     <div className="App">
@@ -26,6 +32,7 @@ function App() {
         <Routes>         
           <Route exact path="/" element={<Login />} />
           <Route exact path="/cadastro" element={<NovoUsuario/>}/> 
+         {/* <Route exact path="/fpdf/:codigo" element ={<FPdf/>}/>*/}
           <Route exact path="/clientes" element={<Home />} />
           <Route exact path="/novoCliente/:codigo" element={<NovoCliente />} />
         </Routes>

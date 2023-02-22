@@ -92,7 +92,10 @@ export default function Clientes() {
                                     <td>{cliente.nome ?? ""}</td>
                                     <td>{cliente.cpf ?? ""}</td>
                                     <td>
-                                        <button className='btn btn-primary mx-2'>vizualizar</button>
+                                        <Link className='btn btn-outline-primary mx-2'
+                                            to={`/fpdf/${cliente.codigo}`} >
+                                            Imprimir
+                                        </Link>
                                         <Link className='btn btn-outline-primary mx-2'
                                             to={`/novoCliente/${cliente.codigo}`} >
                                             Editar
