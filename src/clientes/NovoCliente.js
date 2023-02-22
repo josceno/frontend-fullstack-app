@@ -33,6 +33,7 @@ export default function NovoCliente() {
         setCliente({ ...cliente, [e.target.name]: e.target.value })
     }
     const onSubmit = async (e) => {
+        e.preventDefault();
         console.log("cliente: " + cliente.codigo)
         await axios.put(`http://localhost:8080/cliente/${codigo}`, cliente);
         navigate("/clientes")
@@ -46,7 +47,6 @@ export default function NovoCliente() {
     useEffect(() => {
         carregarCliente();
     }, []);
-    
 
     useEffect(() => {
         const carregarClientes = async () => {
@@ -55,12 +55,12 @@ export default function NovoCliente() {
         };
         carregarClientes();
     }, []);
-    
+
     return (
         
             <div className='container'>
                 <div className='row'>
-                        <form  >
+                        <form onSubmit={(e) => onSubmit(e)} >
                             <div className='form-group'>
                                 <label htmlFor="nome">Nome:</label>
                                 <input className="form-control" type={"text"}  id="nome" name="nome" value={nome} onChange={(e) => onInputChange(e)} />
@@ -125,8 +125,10 @@ export default function NovoCliente() {
                                 <label htmlFor="observacao">Observação:</label>
                                 <input className="form-control" type="text" id="observacao" name="observacao" rows="6" value={observacao} onChange={(e) => onInputChange(e)} />
                             </div>
-                            <button onSubmit={(e) => onSubmit(e)} className='btn btn-outline-primary'>adicionar</button>
 
+                            <button type='submit' className='btn btn-outline-primary'>adicionar</button>
+
+                            <button type='reset' className='btn btn-outline-danger'>Cancelar</button>
                         </form>
 
                 </div>
