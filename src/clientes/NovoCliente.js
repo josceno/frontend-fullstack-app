@@ -125,9 +125,7 @@ export default function NovoCliente() {
                                 <label htmlFor="observacao">Observação:</label>
                                 <input className="form-control" type="text" id="observacao" name="observacao" rows="6" value={observacao} onChange={(e) => onInputChange(e)} />
                             </div>
-
                             <button type='submit' className='btn btn-outline-primary'>adicionar</button>
-
                             <button type='reset' className='btn btn-outline-danger'>Cancelar</button>
                         </form>
 

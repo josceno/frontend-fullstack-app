@@ -36,9 +36,11 @@ export default function Navbar() {
     };
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <nav style={{ width: '148%' }} className="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">Navbar</a>
+                    <button data-bs-toggle="modal" data-bs-target="#janelaModal" className='btn btn-outline-light' >Cadastrar Usuário</button>
+                    <Link className="navbar-brand" to="/clienteRelatorio" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16"/>imprimir</Link>
+                            
                     <button className="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -48,8 +50,8 @@ export default function Navbar() {
                         aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <button data-bs-toggle="modal" data-bs-target="#janelaModal" className='btn btn-outline-light' to="/novoCliente" >Cadastrar Usuário</button>
                 </div>
+
             </nav>
 
             <div id="janelaModal" class="modal fade">
