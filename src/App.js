@@ -20,11 +20,11 @@ function App() {
              <Route exact path="/clienteRelatorio" element={<Pdf/>}/>
             </Routes>
     </Router>
-    <Router>
+    {/*<Router>
            <Routes>
             <Route exact path="/fpdf/:codigo" element ={<FPdf/>}/>
-            </Routes>
-  </Router>
+            </Routes>*/}
+ 
    
    
     <div className="App">
@@ -32,7 +32,7 @@ function App() {
         <Routes>         
           <Route exact path="/" element={<Login />} />
           <Route exact path="/cadastro" element={<NovoUsuario/>}/> 
-         {/* <Route exact path="/fpdf/:codigo" element ={<FPdf/>}/>*/}
+          <Route exact path="/fpdf/:codigo" element ={<FPdf/>}/>
           <Route exact path="/clientes" element={<Home />} />
           <Route exact path="/novoCliente/:codigo" element={<NovoCliente />} />
         </Routes>

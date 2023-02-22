@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 
 
 
-export default function Fpdf() {
+function Fpdf() {
  
     let navlink=useNavigate("/clientes")
     
@@ -33,24 +33,26 @@ export default function Fpdf() {
     const onInputChange = (e) => {
         setCliente({ ...cliente, [e.target.name]: e.target.value })
     }
-    
-    const carregarCliente = async () => {
-        const result = await axios.get(`http://localhost:8080/imprimirF/${codigo}`);
-        console.log("cliente: "+codigo)
-        setCliente(result.data);
+    axios.get(`http://localhost:8080/imprimirF/${codigo}`);
+    /*const carregarCliente = async () => {
+         await axios.get(`http://localhost:8080/imprimirF/${codigo}`);
+        
     };
 
     useEffect(() => {
         carregarCliente();
-    }, []);
+    }, []);*/
 
     const [numPages, setNumPages] = useState(1);  
     return (
-            <html width={"100%"}>
-              <embed src={process.env.PUBLIC_URL + './clientesF.pdf'} width="100%" height="1336px" />
-              </html>
+        <div>
+        <object data="/clienteF.pdf" type="application/pdf" width="100%" height="700px">
+        </object>
+    </div>
+
   );    
 
 
   
 }
+export default Fpdf
